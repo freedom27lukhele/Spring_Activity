@@ -1,7 +1,10 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
+import com.example.demo.dao.ClientRepository;
 import com.example.demo.dao.LoanRepository;
+import com.example.demo.entity.Client;
 import com.example.demo.entity.Loan;
+import com.example.demo.service.LoanService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +15,13 @@ import java.util.Optional;
 @Service
 public class LoanServiceImpl implements LoanService {
 
+    private ClientRepository clientRepository;
     private LoanRepository loanRepository;
 
     @Autowired
-    public LoanServiceImpl(LoanRepository loanRepository) {
+    public LoanServiceImpl(LoanRepository loanRepository, ClientRepository clientRepository) {
         this.loanRepository = loanRepository;
+        this.clientRepository = clientRepository;
     }
 
 
@@ -39,13 +44,11 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    @Transactional
     public Loan save(Loan theLoan) {
      return loanRepository.save(theLoan);
     }
 
     @Override
-    @Transactional
     public void deleteById(int theId) {
         loanRepository.deleteById(theId);
     }

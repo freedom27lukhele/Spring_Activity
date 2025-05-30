@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.dao.ClientRepository;
 import com.example.demo.entity.Client;
+import com.example.demo.service.ClientService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,13 +41,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional
     public Client save(Client theClient) {
         return clientRepository.save(theClient);
     }
 
     @Override
-    @Transactional
     public void deleteById(int theId) {
         clientRepository.deleteById(theId);
     }
