@@ -60,6 +60,7 @@ public class LoanRestController {
         loan.setStartDate(theLoan.getStartDate());
         loan.setStatus(theLoan.getStatus());
         loan.setClient(client);
+        loan.setTotal(calculateTotal(theLoan.getAmount(),theLoan.getInterest(),theLoan.getTermMonths()));
 
         return ResponseEntity.ok(loanService.save(loan));
     }
@@ -75,5 +76,10 @@ public class LoanRestController {
         loanService.deleteById(loanId);
     }
 
+
+    //this is to create the total of the loan
+    public static double calculateTotal(double amount,double interest,int termMonths) {
+       return Math.round(amount * Math.pow(1+(interest/100),termMonths));
+    }
 
 }
